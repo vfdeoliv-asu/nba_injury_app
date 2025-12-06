@@ -4,15 +4,12 @@
     <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Diabetes Progression Prediction using Machine Learning">
-    <meta name="author" content="Your Name / Team Name">
+    <meta name="description" content="NBA injury risk prediction using machine learning">
+    <meta name="author" content="Vitor Hugo de Oliveira">
 
-    <title>Diabetes Prediction App</title>
+    <title>NBA Injury Risk Predictor</title>
 
     <!-- Tailwind CSS CDN -->
-    <!-- Educational Note: We use the CDN for simplicity in this example.
-         For production, you should use the Tailwind CLI or PostCSS setup
-         to generate a smaller, optimized CSS file with only the classes you use. -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Custom CSS (for animations and special effects) -->
@@ -20,12 +17,9 @@
 
     <!-- Tailwind Configuration (Optional: Customize colors, fonts, etc.) -->
     <script>
-        // Configure Tailwind with custom theme settings
-        // This allows you to define your own color palette, spacing, etc.
         tailwind.config = {
             theme: {
                 extend: {
-                    // Custom color palette matching our design
                     colors: {
                         primary: {
                             500: '#667eea',
@@ -44,224 +38,190 @@
     </script>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-primary-500 to-secondary-500 p-4 sm:p-6 lg:p-8 flex items-center justify-center font-sans">
-    <!--
-        Educational Note: Body Styling
-        -----------------------------
-        - min-h-screen: Ensures the page is at least full viewport height
-        - bg-gradient-to-br: Creates a diagonal gradient background
-        - p-4 sm:p-6 lg:p-8: Responsive padding (increases on larger screens)
-        - flex items-center justify-center: Centers content vertically and horizontally
-        - font-sans: Uses a clean sans-serif font stack
-    -->
     <!-- Main Container -->
     <div class="w-full max-w-6xl mx-auto bg-white rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-10">
-        <!--
-            Educational Note: Container Styling
-            -----------------------------------
-            - w-full: Takes full width of parent
-            - max-w-6xl: Maximum width constraint for readability
-            - mx-auto: Centers the container horizontally
-            - bg-white: White background for contrast
-            - rounded-2xl: Large rounded corners for modern look
-            - shadow-2xl: Deep shadow for depth
-            - p-6 sm:p-8 lg:p-10: Responsive padding
-        -->
-
         <!-- Header -->
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-500 text-center mb-3">
-            Diabetes Progression Prediction
+            NBA Injury Risk Prediction
         </h1>
         <p class="text-center text-gray-600 mb-8 sm:mb-10 text-base sm:text-lg">
-            Enter patient data to predict diabetes progression
+            Enter player tracking and usage data to estimate injury risk.
         </p>
 
         <!-- Prediction Form -->
         <form id="predictionForm" class="space-y-6">
-            <!--
-                Educational Note: Form Structure
-                --------------------------------
-                - space-y-6: Adds consistent vertical spacing between form sections
-                - This creates a clean, organized layout
-            -->
             <!-- Form Grid: Input Fields -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
-                <!--
-                    Educational Note: Responsive Grid
-                    ---------------------------------
-                    - grid: Enables CSS Grid layout
-                    - grid-cols-1: 1 column on mobile
-                    - sm:grid-cols-2: 2 columns on small screens and up
-                    - lg:grid-cols-5: 5 columns on large screens and up
-                    - gap-4 sm:gap-5: Responsive gap between grid items
-                    This creates a responsive layout that adapts to screen size
-                -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
 
-                <!-- Age Input -->
+                <!-- AGE -->
                 <div class="flex flex-col">
-                    <label for="age" class="font-semibold mb-2 text-gray-700 text-sm">
-                        Age (normalized)
+                    <label for="AGE" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Age (years)
                     </label>
                     <input
                         type="number"
-                        id="age"
-                        name="age"
-                        step="0.01"
-                        value="0"
+                        id="AGE"
+                        name="AGE"
+                        step="0.1"
+                        value="25"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
+                    <span class="text-xs text-gray-500 mt-1">
+                        Player age in years
+                    </span>
                 </div>
 
-                <!-- Sex Input -->
+                <!-- PLAYER_HEIGHT_INCHES -->
                 <div class="flex flex-col">
-                    <label for="sex" class="font-semibold mb-2 text-gray-700 text-sm">
-                        Sex (normalized)
+                    <label for="PLAYER_HEIGHT_INCHES" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Height (inches)
                     </label>
                     <input
                         type="number"
-                        id="sex"
-                        name="sex"
-                        step="0.01"
-                        value="0"
+                        id="PLAYER_HEIGHT_INCHES"
+                        name="PLAYER_HEIGHT_INCHES"
+                        step="0.1"
+                        value="78"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
+                    <span class="text-xs text-gray-500 mt-1">
+                        Example: 78 = 6'6"
+                    </span>
                 </div>
 
-                <!-- BMI Input -->
+                <!-- PLAYER_WEIGHT -->
                 <div class="flex flex-col">
-                    <label for="bmi" class="font-semibold mb-2 text-gray-700 text-sm">
-                        BMI (normalized)
+                    <label for="PLAYER_WEIGHT" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Weight (lbs)
                     </label>
                     <input
                         type="number"
-                        id="bmi"
-                        name="bmi"
-                        step="0.01"
-                        value="0"
+                        id="PLAYER_WEIGHT"
+                        name="PLAYER_WEIGHT"
+                        step="1"
+                        value="220"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">Body Mass Index</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Player listed weight
+                    </span>
                 </div>
 
-                <!-- Blood Pressure Input -->
+                <!-- USG_PCT -->
                 <div class="flex flex-col">
-                    <label for="bp" class="font-semibold mb-2 text-gray-700 text-sm">
-                        Blood Pressure (normalized)
+                    <label for="USG_PCT" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Usage Rate (%)
                     </label>
                     <input
                         type="number"
-                        id="bp"
-                        name="bp"
-                        step="0.01"
-                        value="0"
+                        id="USG_PCT"
+                        name="USG_PCT"
+                        step="0.1"
+                        value="22.5"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">Average blood pressure</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Estimated offensive usage percentage
+                    </span>
                 </div>
 
-                <!-- S1 Input -->
+                <!-- AVG_SEC_PER_TOUCH -->
                 <div class="flex flex-col">
-                    <label for="s1" class="font-semibold mb-2 text-gray-700 text-sm">
-                        S1 (normalized)
+                    <label for="AVG_SEC_PER_TOUCH" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Avg Seconds per Touch
                     </label>
                     <input
                         type="number"
-                        id="s1"
-                        name="s1"
+                        id="AVG_SEC_PER_TOUCH"
+                        name="AVG_SEC_PER_TOUCH"
                         step="0.01"
-                        value="0"
+                        value="2.5"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">Total serum cholesterol</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Average time (seconds) per touch
+                    </span>
                 </div>
 
-                <!-- S2 Input -->
+                <!-- AVG_DRIB_PER_TOUCH -->
                 <div class="flex flex-col">
-                    <label for="s2" class="font-semibold mb-2 text-gray-700 text-sm">
-                        S2 (normalized)
+                    <label for="AVG_DRIB_PER_TOUCH" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Avg Dribbles per Touch
                     </label>
                     <input
                         type="number"
-                        id="s2"
-                        name="s2"
+                        id="AVG_DRIB_PER_TOUCH"
+                        name="AVG_DRIB_PER_TOUCH"
                         step="0.01"
-                        value="0"
+                        value="2.0"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">Low-density lipoproteins</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Ball-handling intensity per touch
+                    </span>
                 </div>
 
-                <!-- S3 Input -->
+                <!-- ELBOW_TOUCHES -->
                 <div class="flex flex-col">
-                    <label for="s3" class="font-semibold mb-2 text-gray-700 text-sm">
-                        S3 (normalized)
+                    <label for="ELBOW_TOUCHES" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Elbow Touches (per game)
                     </label>
                     <input
                         type="number"
-                        id="s3"
-                        name="s3"
-                        step="0.01"
-                        value="0"
+                        id="ELBOW_TOUCHES"
+                        name="ELBOW_TOUCHES"
+                        step="0.1"
+                        value="3.0"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">High-density lipoproteins</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Touches at the elbow area
+                    </span>
                 </div>
 
-                <!-- S4 Input -->
+                <!-- POST_TOUCHES -->
                 <div class="flex flex-col">
-                    <label for="s4" class="font-semibold mb-2 text-gray-700 text-sm">
-                        S4 (normalized)
+                    <label for="POST_TOUCHES" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Post Touches (per game)
                     </label>
                     <input
                         type="number"
-                        id="s4"
-                        name="s4"
-                        step="0.01"
-                        value="0"
+                        id="POST_TOUCHES"
+                        name="POST_TOUCHES"
+                        step="0.1"
+                        value="2.0"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">Total cholesterol/HDL</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Back-to-the-basket touches
+                    </span>
                 </div>
 
-                <!-- S5 Input -->
+                <!-- PAINT_TOUCHES -->
                 <div class="flex flex-col">
-                    <label for="s5" class="font-semibold mb-2 text-gray-700 text-sm">
-                        S5 (normalized)
+                    <label for="PAINT_TOUCHES" class="font-semibold mb-2 text-gray-700 text-sm">
+                        Paint Touches (per game)
                     </label>
                     <input
                         type="number"
-                        id="s5"
-                        name="s5"
-                        step="0.01"
-                        value="0"
+                        id="PAINT_TOUCHES"
+                        name="PAINT_TOUCHES"
+                        step="0.1"
+                        value="5.0"
                         required
                         class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
                     >
-                    <span class="text-xs text-gray-500 mt-1">Log of serum triglycerides</span>
-                </div>
-
-                <!-- S6 Input -->
-                <div class="flex flex-col">
-                    <label for="s6" class="font-semibold mb-2 text-gray-700 text-sm">
-                        S6 (normalized)
-                    </label>
-                    <input
-                        type="number"
-                        id="s6"
-                        name="s6"
-                        step="0.01"
-                        value="0"
-                        required
-                        class="px-3 py-2 border-2 border-gray-300 rounded-lg text-base focus:outline-none focus:border-primary-500 transition-colors duration-200"
-                    >
-                    <span class="text-xs text-gray-500 mt-1">Blood sugar level</span>
+                    <span class="text-xs text-gray-500 mt-1">
+                        Touches inside the paint
+                    </span>
                 </div>
             </div>
 
@@ -270,38 +230,16 @@
                 type="submit"
                 class="btn-submit w-full py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-semibold text-lg rounded-lg hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary-500/50 active:translate-y-0 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none transition-all duration-200"
             >
-                <!--
-                    Educational Note: Button Styling
-                    --------------------------------
-                    - w-full: Full width button
-                    - py-4: Vertical padding for a larger click target
-                    - bg-gradient-to-r: Horizontal gradient background
-                    - hover:-translate-y-0.5: Subtle lift on hover
-                    - hover:shadow-lg: Enhanced shadow on hover
-                    - disabled:opacity-60: Visual feedback for disabled state
-                    - transition-all: Smooth transitions for all changes
-                -->
-                Get Prediction
+                Get Injury Risk Prediction
             </button>
         </form>
 
         <!-- Prediction Result Display -->
         <div id="result" class="hidden mt-10 p-8 bg-gradient-to-r from-pink-400 to-red-500 rounded-xl text-center slide-in">
-            <!--
-                Educational Note: Result Display Styling
-                ----------------------------------------
-                - hidden: Initially hidden, shown by JavaScript
-                - mt-10: Top margin for spacing
-                - p-8: Generous padding
-                - bg-gradient-to-r: Horizontal gradient
-                - rounded-xl: Rounded corners
-                - text-center: Centered text
-                - slide-in: Custom animation class (defined in style.css)
-            -->
             <h2 class="text-white text-2xl font-bold mb-5">Prediction Result</h2>
             <div id="predictionValue" class="text-5xl sm:text-6xl font-bold text-white my-5 drop-shadow-lg"></div>
             <p class="text-white/90 text-base mt-3">
-                Diabetes progression measure (higher values indicate greater progression)
+                Estimated injury risk score (higher values indicate greater risk).
             </p>
         </div>
 
@@ -310,22 +248,12 @@
 
         <!-- Information Box -->
         <div class="mt-10 p-6 bg-gray-50 border-l-4 border-primary-500 rounded-lg">
-            <!--
-                Educational Note: Info Box Styling
-                ----------------------------------
-                - mt-10: Top margin for spacing
-                - p-6: Padding for content
-                - bg-gray-50: Light gray background
-                - border-l-4: Left border for visual accent
-                - border-primary-500: Border color matches our theme
-                - rounded-lg: Rounded corners
-            -->
             <h3 class="text-primary-500 font-bold text-xl mb-3">About This Model</h3>
             <p class="text-gray-600 leading-relaxed">
                 This application uses a machine learning model deployed on Databricks MLflow to predict
-                diabetes progression based on patient data. All input features are normalized values
-                from the standard diabetes dataset. The prediction represents the quantitative measure
-                of disease progression one year after baseline.
+                NBA player injury risk based on age, body profile, usage rate, and player tracking
+                statistics such as touches and dribbles. The output is a risk score that can help
+                contextualize workload and potential injury exposure.
             </p>
         </div>
 
@@ -342,9 +270,6 @@
     </div>
 
     <!-- External JavaScript File -->
-    <!-- Educational Note: We place scripts at the end of the body so the DOM is fully
-         loaded before JavaScript executes. The external file keeps our HTML clean and
-         makes the JavaScript reusable and easier to maintain. -->
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
