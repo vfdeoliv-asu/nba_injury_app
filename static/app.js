@@ -85,23 +85,20 @@ async function handleFormSubmit(event) {
  */
 function collectFormData() {
     return {
-        AGE: parseFloat(document.getElementById('AGE').value),
-        PLAYER_HEIGHT_INCHES: parseFloat(
-            document.getElementById('PLAYER_HEIGHT_INCHES').value,
-        ),
-        PLAYER_WEIGHT: parseFloat(document.getElementById('PLAYER_WEIGHT').value),
-        USG_PCT: parseFloat(document.getElementById('USG_PCT').value),
-        AVG_SEC_PER_TOUCH: parseFloat(
-            document.getElementById('AVG_SEC_PER_TOUCH').value,
-        ),
-        AVG_DRIB_PER_TOUCH: parseFloat(
-            document.getElementById('AVG_DRIB_PER_TOUCH').value,
-        ),
-        ELBOW_TOUCHES: parseFloat(document.getElementById('ELBOW_TOUCHES').value),
-        POST_TOUCHES: parseFloat(document.getElementById('POST_TOUCHES').value),
-        PAINT_TOUCHES: parseFloat(document.getElementById('PAINT_TOUCHES').value),
+        // Reuse the existing inputs but send NBA feature names to the backend
+        AGE: parseFloat(document.getElementById('age').value),
+        PLAYER_HEIGHT_INCHES: parseFloat(document.getElementById('sex').value),
+        PLAYER_WEIGHT: parseFloat(document.getElementById('bmi').value),
+        USG_PCT: parseFloat(document.getElementById('bp').value),
+        AVG_SEC_PER_TOUCH: parseFloat(document.getElementById('s1').value),
+        AVG_DRIB_PER_TOUCH: parseFloat(document.getElementById('s2').value),
+        ELBOW_TOUCHES: parseFloat(document.getElementById('s3').value),
+        POST_TOUCHES: parseFloat(document.getElementById('s4').value),
+        PAINT_TOUCHES: parseFloat(document.getElementById('s5').value)
+        // we ignore s6 – you can remove that field from the HTML later if you want
     };
 }
+
 
 function validateFormData(formData) {
     for (const [key, value] of Object.entries(formData)) {
