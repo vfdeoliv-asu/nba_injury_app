@@ -83,40 +83,25 @@ async function handleFormSubmit(event) {
  * Collect data from NBA form fields
  * Keys MUST match config.MODEL_FEATURES in config.py
  */
-
 function collectFormData() {
-    // Helper to avoid "null.value" crashes and give a clear error instead
-    const getNumber = (id) => {
-        const el = document.getElementById(id);
-        if (!el) {
-            throw new Error(`Input with id="${id}" not found in the page.`);
-        }
-        const value = parseFloat(el.value);
-        if (isNaN(value) || !isFinite(value)) {
-            throw new Error(`Invalid value for "${id}". Please enter a number.`);
-        }
-        return value;
-    };
-
-    // 🚨 JSON KEYS must match Config.MODEL_FEATURES in config.py
-    // (AGE, PLAYER_HEIGHT_INCHES, PLAYER_WEIGHT, USG_PCT, AVG_SEC_PER_TOUCH,
-    //  AVG_DRIB_PER_TOUCH, ELBOW_TOUCHES, POST_TOUCHES, PAINT_TOUCHES)
-    // HTML IDs can be nicer / lowercase, we map them here.
-
     return {
-        AGE: getNumber('age'),
-        PLAYER_HEIGHT_INCHES: getNumber('player_height_inches'),
-        PLAYER_WEIGHT: getNumber('player_weight'),
-        USG_PCT: getNumber('usg_pct'),
-        AVG_SEC_PER_TOUCH: getNumber('avg_sec_per_touch'),
-        AVG_DRIB_PER_TOUCH: getNumber('avg_drib_per_touch'),
-        ELBOW_TOUCHES: getNumber('elbow_touches'),
-        POST_TOUCHES: getNumber('post_touches'),
-        PAINT_TOUCHES: getNumber('paint_touches'),
+        AGE: parseFloat(document.getElementById('AGE').value),
+        PLAYER_HEIGHT_INCHES: parseFloat(
+            document.getElementById('PLAYER_HEIGHT_INCHES').value,
+        ),
+        PLAYER_WEIGHT: parseFloat(document.getElementById('PLAYER_WEIGHT').value),
+        USG_PCT: parseFloat(document.getElementById('USG_PCT').value),
+        AVG_SEC_PER_TOUCH: parseFloat(
+            document.getElementById('AVG_SEC_PER_TOUCH').value,
+        ),
+        AVG_DRIB_PER_TOUCH: parseFloat(
+            document.getElementById('AVG_DRIB_PER_TOUCH').value,
+        ),
+        ELBOW_TOUCHES: parseFloat(document.getElementById('ELBOW_TOUCHES').value),
+        POST_TOUCHES: parseFloat(document.getElementById('POST_TOUCHES').value),
+        PAINT_TOUCHES: parseFloat(document.getElementById('PAINT_TOUCHES').value),
     };
 }
-
-
 
 function validateFormData(formData) {
     for (const [key, value] of Object.entries(formData)) {
